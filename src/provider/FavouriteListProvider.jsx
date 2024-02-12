@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { FavouriteContext } from '../contexts';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const FavouriteListProvider = ({ children }) => {
-    const [favouriteList, setFavouriteList] = useState([]);
+    const [favouriteList, setFavouriteList] = useLocalStorage('favourites', []);
 
     const isFavourite = (location) => {
         return favouriteList.some((item) => item.location === location);
