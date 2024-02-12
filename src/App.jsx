@@ -1,7 +1,12 @@
 import Home from './pages/Home';
+import WeatherProvider from './provider/WeatherProvider';
 
 function App() {
-    return <Home />;
+    return (
+        <WeatherProvider>
+            <Home />
+        </WeatherProvider>
+    );
 }
 
 export default App;
