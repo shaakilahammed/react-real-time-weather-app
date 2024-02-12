@@ -1,11 +1,17 @@
 import Home from './pages/Home';
+import FavouriteListProvider from './provider/FavouriteListProvider';
+import LocationProvider from './provider/LocationProvider';
 import WeatherProvider from './provider/WeatherProvider';
 
 function App() {
     return (
-        <WeatherProvider>
-            <Home />
-        </WeatherProvider>
+        <LocationProvider>
+            <WeatherProvider>
+                <FavouriteListProvider>
+                    <Home />
+                </FavouriteListProvider>
+            </WeatherProvider>
+        </LocationProvider>
     );
 }
 

@@ -1,13 +1,9 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import searchImage from '../../assets/search.svg';
-import useLocation from '../../hooks/useLocation';
+import { LocationContext } from '../../contexts';
 import SearchSuggestion from './SearchSuggestion';
 const SearchBox = () => {
-    const [search, setSearch] = useState('');
-    const locationData = useLocation(search);
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
-    };
+    const { handleSearch, searchText } = useContext(LocationContext);
     const handleSubmit = (e) => {
         e.preventDefault();
     };
@@ -20,14 +16,14 @@ const SearchBox = () => {
                     type="search"
                     placeholder="Search Location"
                     onChange={handleSearch}
-                    value={search}
+                    value={searchText}
                     required
                 />
                 <button type="submit">
                     <img src={searchImage} />
                 </button>
             </div>
-            {search && <SearchSuggestion locationData={locationData} />}
+            {searchText && <SearchSuggestion />}
         </form>
     );
 };

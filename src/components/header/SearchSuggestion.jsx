@@ -1,5 +1,20 @@
-const SearchSuggestion = ({ locationData }) => {
-    const { loading, data, error } = locationData;
+import { useContext } from 'react';
+import { LocationContext } from '../../contexts';
+
+const SearchSuggestion = () => {
+    const {
+        locationData: { loading, data, error },
+        handleSelectedLocation,
+        resetSearch,
+    } = useContext(LocationContext);
+
+    const handleLocation = (location) => {
+        handleSelectedLocation({
+            latitude: location.lat,
+            longitude: location.lon,
+        });
+        resetSearch();
+    };
 
     let content;
     if (loading) {
@@ -35,9 +50,6 @@ const SearchSuggestion = ({ locationData }) => {
         ));
     }
 
-    const handleLocation = (location) => {
-        console.log(location);
-    };
     return (
         <div className="w-full max-w-xs space-x-2 ml-0 bg-black/30 rounded-md border-gray-500 absolute top-10 text-white shadow-lg ">
             <ul className="space-y-2 *:py-1 *:px-4 *:cursor-pointer">
