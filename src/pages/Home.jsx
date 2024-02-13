@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from 'react';
 import ClearSkyImage from '../assets/backgrounds/clear-sky.jpg';
 import FewCloudsImage from '../assets/backgrounds/few-clouds.jpg';
 import MistImage from '../assets/backgrounds/mist.jpeg';
@@ -8,13 +9,14 @@ import ThunderStormImage from '../assets/backgrounds/thunderstorm.jpg';
 import WinterImage from '../assets/backgrounds/winter.jpg';
 import Header from '../components/header/Header';
 import WeatherBoard from '../components/weather-board/WeatherBoard';
+import { WeatherContext } from '../contexts';
 const Home = () => {
-    // const [climateImage, setClimateImage] = useState('');
-    // const {
-    //     weather: {
-    //         data: [weatherData],
-    //     },
-    // } = useContext(WeatherContext);
+    const [climateImage, setClimateImage] = useState('');
+    const {
+        weather: {
+            data: [weatherData],
+        },
+    } = useContext(WeatherContext);
     function getBackgroundImage(clmte) {
         switch (clmte) {
             case 'Rain':
@@ -38,13 +40,13 @@ const Home = () => {
         }
     }
 
-    // useEffect(() => {
-    //     const bgImage = getBackgroundImage(weatherData?.climate);
-    //     setClimateImage(bgImage);
-    // }, [weatherData?.climate]);
+    useEffect(() => {
+        const bgImage = getBackgroundImage(weatherData?.climate);
+        setClimateImage(bgImage);
+    }, [weatherData?.climate]);
     return (
         <div
-            style={{ backgroundImage: `url(${ClearSkyImage})` }}
+            style={{ backgroundImage: `url(${climateImage})` }}
             className={`bg-no-repeat bg-cover h-screen grid place-items-center`}
         >
             <Header />
